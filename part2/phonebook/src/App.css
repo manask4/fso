@@ -1,0 +1,88 @@
+.App {
+  text-align: center;
+  min-height: 100vh;
+}
+
+input {
+  padding: 1em;
+  border-radius: 4px;
+}
+
+.form-inputs * {
+  margin-right: 10px;
+}
+
+.form-inputs {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.form-field-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+button {
+  border: 0;
+  border-radius: 4px;
+  box-shadow: 0px 2px 4px #ccc;
+  cursor: pointer;
+  transition: 0.2s linear;
+}
+
+button:hover {
+  box-shadow: 0px 4px 8px #aaa;
+}
+
+.add-btn {
+  background-color: greenyellow;
+  font-size: 16px;
+  padding: 1em;
+}
+
+.delete-btn {
+  background-color: orangered;
+  font-size: 12px;
+  padding: 0.5em;
+  color: white;
+}
+
+.persons-table {
+  box-shadow: 0px 2px 4px #ccc;
+  border-radius: 4px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.persons-table td {
+  padding: 10px;
+}
+
+.number {
+  font-weight: bold;
+}
+
+.notification {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0 10px;
+  font-size: 14px;
+  width: fit-content;
+  margin: 2em auto;
+  transition: 0.5s linear;
+}
+
+.success {
+  color: #1B5E20;
+  background-color: #C8E6C9;
+  border: 1px solid #C8E6C9;
+}
+
+.error {
+  color: #b71c1c;
+  background-color: #ffcdd2;
+  border: 1px solid #ffcdd2;
+}
