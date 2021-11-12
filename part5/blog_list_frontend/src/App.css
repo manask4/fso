@@ -1,0 +1,168 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'sans';
+}
+
+h1 {
+  color: #8A2BE1;
+}
+
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card {
+  box-shadow: 0px 2px 4px #ccc;
+  padding: 1em;
+}
+
+.login-card {
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
+
+.form-group label {
+  color: #455A64;
+}
+
+.form-group input {
+  font-size: 1.4em;
+  padding: 0.5em;
+  color: #263238;
+  margin-top: 4px;
+}
+
+.login-error {
+  color: #f44336;
+  margin-top: 1em;
+}
+
+.main {
+  padding: 2em;
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+.container {
+  border: 1px solid #E1BEE7;
+  padding: 1em 2em;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.banner {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  margin-right: 0.5em;
+  font-size: 2.5em;
+}
+
+.blog {
+  color: #616161;
+  /* box-shadow: 0px 2px 4px #ccc; */
+  margin-bottom: 1em;
+  padding: 0 1em;
+  border-left: 2px solid #2962FF;
+}
+
+.logged-in {
+  color: #2962FF;
+  font-size: 0.9em;
+  background-color: #FFF176;
+  padding: 5px 10px;
+  margin-right: 10px;
+}
+
+.log-out-link {
+  font-size: 0.9em;
+  color: #455A64;
+  cursor: pointer;
+}
+
+.log-out-link:hover {
+  text-decoration: underline;
+}
+
+.create-new-blog-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.create-new-blog-btn {
+  margin-left: 15px;
+}
+
+.btn {
+  padding: 0.5em;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  border: 0;
+  color: #424242;
+}
+
+.btn-small {
+  font-size: 0.9em;
+  padding: 4px 8px;
+}
+
+.btn:hover {
+  box-shadow: 0px 4px 8px #ddd;
+  transition: 0.2s linear;
+}
+
+.btn-success {
+  background-color: #B2FF59;
+  color: #1B5E20;
+}
+
+.btn-secondary {
+  color: #757575;
+}
+
+.blog-summary {
+  display: flex;
+  align-items: center;
+}
+
+.blog-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 6em;
+}
+
+.blog-title {
+  margin-right: 10px;
+}
+
+.blog-remove-btn {
+  background-color: #e57373;
+  color: #fff;
+  /* margin-top: 1em; */
+}
