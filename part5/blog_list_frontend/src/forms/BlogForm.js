@@ -1,30 +1,20 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import blogService from "../services/blogs";
 
-function CreateBlog({
-  updateBlogs,
-  handleSetDisplayCreateForm,
-  flashNotification,
-}) {
+function BlogForm({ onBlogCreate, onToggle }) {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [url, setUrl] = useState("");
 
-  const handleCreateBlog = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newBlog = { title, author, url };
-    const response = await blogService.create(newBlog);
-    if (response.status === 201) {
-      updateBlogs(response.data);
-      flashNotification({ text: "New blog added!", type: "success" });
-    }
-    handleSetDisplayCreateForm();
+    onBlogCreate(newBlog);
   };
 
   const handleCancel = (e) => {
     e.preventDefault();
-    handleSetDisplayCreateForm();
+    onToggle();
   };
 
   const handleTitleChange = (newTitle) => {
@@ -42,7 +32,7 @@ function CreateBlog({
   return (
     <div className="create-new-blog-form">
       <h2>Create new blog</h2>
-      <form onSubmit={(e) => handleCreateBlog(e)}>
+      <form onSubmit={(e) => handleSubmit(e)}>
         <div className="form-group">
           <label htmlFor="title">Title</label>
           <input
@@ -93,10 +83,9 @@ function CreateBlog({
   );
 }
 
-CreateBlog.propTypes = {
-  updateBlogs: PropTypes.func.isRequired,
-  handleSetDisplayCreateForm: PropTypes.func.isRequired,
-  flashNotification: PropTypes.func.isRequired,
+BlogForm.propTypes = {
+  onBlogCreate: PropTypes.func.isRequired,
+  onToggle: PropTypes.func.isRequired,
 };
 
-export default CreateBlog;
+export default BlogForm;

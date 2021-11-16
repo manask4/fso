@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import blogService from "./services/blogs";
 import authService from "./services/auth";
-import Login from "./forms/Login";
-import CreateBlog from "./forms/CreateBlog";
+import LoginForm from "./forms/LoginForm";
+import BlogForm from "./forms/BlogForm";
 import BlogList from "./components/BlogList";
 import AuthLinks from "./components/AuthLinks";
 import Notification from "./components/Notification";
@@ -77,6 +77,15 @@ const App = () => {
     setDisplayCreateForm(!displayCreateForm);
   };
 
+  const handleBlogCreate = async (newBlog) => {
+    const response = await blogService.create(newBlog);
+    if (response.status === 201) {
+      updateBlogs(response.data);
+      flashNotification({ text: "New blog added!", type: "success" });
+    }
+    handleSetDisplayCreateForm();
+  };
+
   if (user !== null) {
     return (
       <div className="main">
@@ -97,10 +106,9 @@ const App = () => {
           </div>
           <div className="content">
             {displayCreateForm && (
-              <CreateBlog
-                updateBlogs={updateBlogs}
-                handleSetDisplayCreateForm={handleSetDisplayCreateForm}
-                flashNotification={flashNotification}
+              <BlogForm
+                onBlogCreate={handleBlogCreate}
+                onToggle={handleSetDisplayCreateForm}
               />
             )}
             <Notification message={notification} />
@@ -119,7 +127,7 @@ const App = () => {
 
   return (
     <div className="app">
-      <Login
+      <LoginForm
         username={username}
         handleUsernameChange={handleUsernameChange}
         password={password}

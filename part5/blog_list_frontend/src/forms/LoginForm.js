@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Login({
+function LoginForm({
   username,
   handleUsernameChange,
   password,
@@ -42,7 +42,7 @@ function Login({
   );
 }
 
-Login.propTypes = {
+LoginForm.propTypes = {
   username: PropTypes.string.isRequired,
   handleUsernameChange: PropTypes.func.isRequired,
   password: PropTypes.string.isRequired,
@@ -51,4 +51,4 @@ Login.propTypes = {
   errorMessage: PropTypes.string.isRequired,
 };
 
-export default Login;
+export default LoginForm;
