@@ -33,7 +33,7 @@ function LoginForm({
             name="password"
           />
         </div>
-        <button className="btn btn-success" type="submit">
+        <button id="login-btn" className="btn btn-success" type="submit">
           Log In
         </button>
         <div className="login-error">{errorMessage}</div>
