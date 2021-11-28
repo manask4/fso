@@ -1,0 +1,61 @@
+import React from "react";
+import PropTypes from "prop-types";
+import { useSelector, useDispatch } from "react-redux";
+import { likeBlog, deleteBlog } from "../reducers/blogsReducer";
+
+function Blog({ blog }) {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
+  const canDelete = blog.user.id === user.id;
+
+  const handleDelete = async (id) => {
+    const message = "Are you sure you want to remove this blog?";
+    const shouldDeleteBlog = window.confirm(message);
+    if (shouldDeleteBlog) {
+      dispatch(deleteBlog(id));
+    }
+  };
+
+  return (
+    <div className="blog">
+      <div className="blog-summary">
+        <h3 className="blog-title">
+          {blog.title} - {blog.author}
+        </h3>
+      </div>
+      <div className="blog-details">
+        <span>
+          Likes: {blog.likes}{" "}
+          <button
+            onClick={() => dispatch(likeBlog(blog))}
+            className="btn btn-small"
+          >
+            Like
+          </button>{" "}
+        </span>
+        <span>
+          URL:{" "}
+          <a href={blog.url} target="_blank" rel="noreferrer">
+            {blog.url}
+          </a>
+        </span>
+        {canDelete && (
+          <div>
+            <button
+              onClick={() => handleDelete(blog.id)}
+              className="btn btn-small blog-remove-btn"
+            >
+              Remove
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+Blog.propTypes = {
+  blog: PropTypes.object.isRequired,
+};
+
+export default Blog;
