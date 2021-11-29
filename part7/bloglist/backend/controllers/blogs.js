@@ -69,4 +69,29 @@ blogsRouter.delete("/:id", userExtractor, async (request, response, next) => {
   }
 });
 
+blogsRouter.post("/:id/comments", userExtractor, async (request, response, next) => {
+  if (!request.body.comment) {
+    return response.status(400).end();
+  }
+
+  try {
+    const user = request.user;
+    if (!user) {
+      return response.status(401).json({ error: "Unauthenticated request" });
+    }
+
+    const blog = await Blog.findById(request.params.id);
+    if (!blog) {
+      return response.status(404).json({ error: "Blog not found" });
+    }
+
+    blog.comments = [...blog.comments, request.body.comment];
+    blog.save();
+
+    response.status(200).json(blog);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = blogsRouter;

@@ -19,11 +19,17 @@ function Blog({ blog }) {
   return (
     <div className="blog">
       <div className="blog-summary">
-        <h3 className="blog-title">
+        <h2 className="blog-title">
           {blog.title} - {blog.author}
-        </h3>
+        </h2>
       </div>
       <div className="blog-details">
+        <span>
+          Link:{" "}
+          <a href={blog.url} target="_blank" rel="noreferrer">
+            {blog.url}
+          </a>
+        </span>
         <span>
           Likes: {blog.likes}{" "}
           <button
@@ -33,12 +39,8 @@ function Blog({ blog }) {
             Like
           </button>{" "}
         </span>
-        <span>
-          URL:{" "}
-          <a href={blog.url} target="_blank" rel="noreferrer">
-            {blog.url}
-          </a>
-        </span>
+
+        <span>Added by: {blog.user.name}</span>
         {canDelete && (
           <div>
             <button

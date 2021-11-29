@@ -4,10 +4,14 @@ import { toggleFormDisplay } from "./blogFormReducer";
 
 const reducer = (state = [], action) => {
   switch (action.type) {
-    case "INIT":
+    case "INIT_BLOGS":
       return action.data;
-    case "ADD":
+    case "ADD_BLOG":
       return [...state, action.data];
+    case "ADD_BLOG_COMMENT":
+      return state.map((item) =>
+        item.id === action.data.id ? action.data : item
+      );
     default:
       return state;
   }
@@ -19,7 +23,7 @@ export const initBlogs = () => {
       return blogs.sort((first, second) => second.likes - first.likes);
     });
     dispatch({
-      type: "INIT",
+      type: "INIT_BLOGS",
       data,
     });
   };
@@ -30,7 +34,7 @@ export const addBlog = (blog) => {
     const response = await blogService.create(blog);
     if (response.status === 201) {
       dispatch({
-        type: "ADD",
+        type: "ADD_BLOG",
         data: response.data,
       });
       dispatch(toggleFormDisplay());
@@ -56,6 +60,18 @@ export const deleteBlog = (id) => {
     const response = await blogService.remove(id);
     if (response.status === 204) {
       dispatch(initBlogs());
+    }
+  };
+};
+
+export const addBlogComment = (id, comment) => {
+  return async (dispatch) => {
+    const response = await blogService.addComment(id, comment);
+    if (response.status === 200) {
+      dispatch({
+        type: "ADD_BLOG_COMMENT",
+        data: response.data,
+      });
     }
   };
 };

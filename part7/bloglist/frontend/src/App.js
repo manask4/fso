@@ -1,25 +1,24 @@
 import React, { useEffect } from "react";
-import blogService from "./services/blogs";
-import LoginForm from "./forms/LoginForm";
-import BlogForm from "./forms/BlogForm";
-import BlogList from "./components/BlogList";
-import AuthLinks from "./components/AuthLinks";
-import Notification from "./components/Notification";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleFormDisplay } from "./reducers/blogFormReducer";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LoginForm from "./forms/LoginForm";
 import { initBlogs } from "./reducers/blogsReducer";
 import { setUser } from "./reducers/authReducer";
+import blogService from "./services/blogs";
+import Navbar from "./components/Navbar";
+import Home from "./pages/HomePage";
+import Users from "./pages/UsersPage";
+import UserProfile from "./pages/UserProfilePage";
+import BlogPage from "./pages/BlogPage";
+
 import "./App.css";
 
 const App = () => {
   const dispatch = useDispatch();
-
-  const showForm = useSelector((state) => state.blogForm.display);
   const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     dispatch(initBlogs());
-
     const loggedInUser = window.localStorage.getItem("user");
     if (loggedInUser) {
       const userInfo = JSON.parse(loggedInUser);
@@ -30,29 +29,19 @@ const App = () => {
 
   if (user !== null) {
     return (
-      <div className="main">
-        <div className="container card">
-          <div className="header">
-            <div className="banner">
-              <h1 className="title">Blogs</h1>
-              {!showForm && (
-                <button
-                  onClick={() => dispatch(toggleFormDisplay())}
-                  className="btn blog-create-btn"
-                >
-                  Create new
-                </button>
-              )}
-            </div>
-            <AuthLinks />
-          </div>
-          <div className="content">
-            {showForm && <BlogForm />}
-            <Notification />
-            {!showForm && <BlogList />}
+      <Router>
+        <div className="main">
+          <div className="card">
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/users" element={<Users />} />
+              <Route path="/users/:id" element={<UserProfile />} />
+              <Route path="/blogs/:id" element={<BlogPage />} />
+            </Routes>
           </div>
         </div>
-      </div>
+      </Router>
     );
   }
 
