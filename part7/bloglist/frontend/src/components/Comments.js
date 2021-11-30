@@ -5,7 +5,7 @@ import CommentForm from "../forms/CommentForm";
 function Comments({ blog }) {
   return (
     <div>
-      <h4>Comments: </h4>
+      <h4 style={{ marginBottom: 0 }}>Comments: </h4>
       <CommentForm />
       {blog.comments.length > 0 && (
         <ul>

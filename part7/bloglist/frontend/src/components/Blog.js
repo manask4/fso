@@ -2,8 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
 import { likeBlog, deleteBlog } from "../reducers/blogsReducer";
+import Title from "../shared/Title";
+import Button from "../shared/Button";
+import { useNavigate } from "react-router-dom";
 
 function Blog({ blog }) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const canDelete = blog.user.id === user.id;
@@ -13,17 +17,23 @@ function Blog({ blog }) {
     const shouldDeleteBlog = window.confirm(message);
     if (shouldDeleteBlog) {
       dispatch(deleteBlog(id));
+      navigate("/");
     }
   };
 
+  const blogDetails = {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    gap: "10px",
+  };
+
   return (
-    <div className="blog">
-      <div className="blog-summary">
-        <h2 className="blog-title">
-          {blog.title} - {blog.author}
-        </h2>
-      </div>
-      <div className="blog-details">
+    <div>
+      <Title h2>
+        {blog.title} - {blog.author}
+      </Title>
+      <div style={blogDetails}>
         <span>
           Link:{" "}
           <a href={blog.url} target="_blank" rel="noreferrer">
@@ -32,23 +42,17 @@ function Blog({ blog }) {
         </span>
         <span>
           Likes: {blog.likes}{" "}
-          <button
-            onClick={() => dispatch(likeBlog(blog))}
-            className="btn btn-small"
-          >
+          <Button small default onClick={() => dispatch(likeBlog(blog))}>
             Like
-          </button>{" "}
+          </Button>{" "}
         </span>
 
         <span>Added by: {blog.user.name}</span>
         {canDelete && (
           <div>
-            <button
-              onClick={() => handleDelete(blog.id)}
-              className="btn btn-small blog-remove-btn"
-            >
+            <Button small onClick={() => handleDelete(blog.id)}>
               Remove
-            </button>
+            </Button>
           </div>
         )}
       </div>

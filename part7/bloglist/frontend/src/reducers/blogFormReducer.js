@@ -4,7 +4,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "SHOW_FORM":
+    case "SHOW_BLOG_FORM":
       return { display: !state.display };
     default:
       return state;
@@ -13,7 +13,7 @@ const reducer = (state = initialState, action) => {
 
 export const toggleFormDisplay = () => {
   return {
-    type: "SHOW_FORM",
+    type: "SHOW_BLOG_FORM",
   };
 };
 

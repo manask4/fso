@@ -8,6 +8,12 @@ const reducer = (state = [], action) => {
       return action.data;
     case "ADD_BLOG":
       return [...state, action.data];
+    case "LIKE_BLOG":
+      return state.map((item) =>
+        item.id === action.data.id ? { ...item, likes: item.likes + 1 } : item
+      );
+    case "DELETE_BLOG":
+      return state.filter((item) => item.id !== action.data);
     case "ADD_BLOG_COMMENT":
       return state.map((item) =>
         item.id === action.data.id ? action.data : item
@@ -19,9 +25,7 @@ const reducer = (state = [], action) => {
 
 export const initBlogs = () => {
   return async (dispatch) => {
-    const data = await blogService.getAll().then((blogs) => {
-      return blogs.sort((first, second) => second.likes - first.likes);
-    });
+    const data = await blogService.getAll();
     dispatch({
       type: "INIT_BLOGS",
       data,
@@ -50,7 +54,10 @@ export const likeBlog = (blog) => {
     const payload = { likes: blog.likes + 1 };
     const response = await blogService.update(blog.id, payload);
     if (response.status === 200) {
-      dispatch(initBlogs());
+      dispatch({
+        type: "LIKE_BLOG",
+        data: blog,
+      });
     }
   };
 };
@@ -59,7 +66,10 @@ export const deleteBlog = (id) => {
   return async (dispatch) => {
     const response = await blogService.remove(id);
     if (response.status === 204) {
-      dispatch(initBlogs());
+      dispatch({
+        type: "DELETE_BLOG",
+        data: id,
+      });
     }
   };
 };

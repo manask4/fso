@@ -1,22 +1,35 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../reducers/authReducer";
+import StyledLink from "../shared/StyledLink";
+import { useNavigate } from "react-router-dom";
 
 function AuthLinks() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
 
-  const handleLogout = () => {
+  const handleLogout = (e) => {
+    e.preventDefault();
     dispatch(logout());
+    navigate("/");
+  };
+
+  const userStyle = {
+    color: "#FFF176",
+    fontWeight: "bold",
+    marginRight: "5px",
   };
 
   return (
     <div className="auth">
-      <span className="logged-in">{user.name}</span>
       {user !== null && (
-        <span onClick={handleLogout} className="log-out-link">
-          Logout
-        </span>
+        <>
+          <span style={userStyle}>{user.name}</span>
+          <StyledLink to="#" onClick={handleLogout}>
+            Logout
+          </StyledLink>
+        </>
       )}
     </div>
   );

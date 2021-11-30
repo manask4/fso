@@ -4,7 +4,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "SET_ERROR":
+    case "SET_LOGIN_ERROR":
       return { error: action.data };
     default:
       return state;
@@ -13,7 +13,7 @@ const reducer = (state = initialState, action) => {
 
 export const setError = (data) => {
   return {
-    type: "SET_ERROR",
+    type: "SET_LOGIN_ERROR",
     data,
   };
 };

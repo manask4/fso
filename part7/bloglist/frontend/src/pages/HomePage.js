@@ -4,6 +4,8 @@ import BlogList from "../components/BlogList";
 import Notification from "../components/Notification";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleFormDisplay } from "../reducers/blogFormReducer";
+import Button from "../shared/Button";
+import Title from "../shared/Title";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -12,17 +14,12 @@ const Home = () => {
   return (
     <div>
       <div className="header">
-        <div className="banner">
-          <h1 className="title">Blogs</h1>
-          {!showForm && (
-            <button
-              onClick={() => dispatch(toggleFormDisplay())}
-              className="btn blog-create-btn"
-            >
-              Create new
-            </button>
-          )}
-        </div>
+        <Title style={{ marginRight: "1em" }}>Blogs</Title>
+        {!showForm && (
+          <Button primary onClick={() => dispatch(toggleFormDisplay())}>
+            Create new
+          </Button>
+        )}
       </div>
       <div className="content">
         {showForm && <BlogForm />}

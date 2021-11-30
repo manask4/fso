@@ -5,7 +5,7 @@ import { setError } from "./loginFormReducer";
 const initialState = { user: null };
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "SET":
+    case "SET_USER":
       return { user: action.data };
     default:
       return state;
@@ -14,7 +14,7 @@ const reducer = (state = initialState, action) => {
 
 export const setUser = (user) => {
   return {
-    type: "SET",
+    type: "SET_USER",
     data: user,
   };
 };

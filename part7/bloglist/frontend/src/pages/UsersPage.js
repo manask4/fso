@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUsers } from "../reducers/usersReducer";
 import { Link } from "react-router-dom";
-// import usersService from "../services/users";
+import Title from "../shared/Title";
+import { Table, TableData, TableHeader } from "../shared/Table";
 
 function Users() {
   const dispatch = useDispatch();
@@ -16,31 +17,29 @@ function Users() {
   return (
     <div>
       <div className="header">
-        <div className="banner">
-          <h1 className="title">Users</h1>
-        </div>
+        <Title className="title">Users</Title>
       </div>
       <div className="content">
-        <table>
+        <Table>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Blogs created</th>
+              <TableHeader>Name</TableHeader>
+              <TableHeader>Blogs created</TableHeader>
             </tr>
           </thead>
           <tbody>
             {users.map((user) => {
               return (
-                <tr key={user.id}>
-                  <td>
+                <tr key={user.id} style={{ backgroundColor: "#FAFAFA" }}>
+                  <TableData>
                     <Link to={`/users/${user.id}`}>{user.name}</Link>
-                  </td>
-                  <td>{user.blogs.length}</td>
+                  </TableData>
+                  <TableData alignRight>{user.blogs.length}</TableData>
                 </tr>
               );
             })}
           </tbody>
-        </table>
+        </Table>
       </div>
     </div>
   );

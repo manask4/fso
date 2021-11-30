@@ -7,13 +7,15 @@ function BlogList() {
 
   return (
     <>
-      {blogs.map((blog) => (
-        <div style={{ marginBottom: "10px" }} key={blog.id}>
-          <Link to={`/blogs/${blog.id}`}>
-            {blog.title} - {blog.author}
-          </Link>
-        </div>
-      ))}
+      {blogs
+        .sort((first, second) => second.likes - first.likes)
+        .map((blog) => (
+          <div style={{ marginBottom: "10px" }} key={blog.id}>
+            <Link to={`/blogs/${blog.id}`}>
+              {blog.title} - {blog.author}
+            </Link>
+          </div>
+        ))}
     </>
   );
 }

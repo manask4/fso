@@ -3,6 +3,7 @@ import Blog from "../components/Blog";
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
 import Comments from "../components/Comments";
+import Title from "../shared/Title";
 
 function BlogPage() {
   const params = useParams();
@@ -16,9 +17,7 @@ function BlogPage() {
   return (
     <div>
       <div className="header">
-        <div className="banner">
-          <h1 className="title">Blog</h1>
-        </div>
+        <Title>Blog</Title>
       </div>
       <div className="content">
         <Blog key={blog.id} blog={blog} />

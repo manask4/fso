@@ -30,7 +30,7 @@ Cypress.Commands.add("createBlog", ({ title, author, url }) => {
   cy.get("#title").type(title);
   cy.get("#author").type(author);
   cy.get("#url").type(url);
-  cy.get(".create-new-blog-btn").click();
+  cy.get("#create-new-blog-btn").click();
 });
 
 Cypress.Commands.add("likeBlog", ({ title }) => {

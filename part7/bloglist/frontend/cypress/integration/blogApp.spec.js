@@ -38,8 +38,8 @@ describe("Blog app", function () {
       cy.get("#password").type("john@doee");
       cy.get("#login-btn").click();
 
-      cy.get(".login-error").should("contain", "Invalid credentials provided.");
-      cy.get(".login-error").should("have.css", "color", "rgb(244, 67, 54)");
+      cy.get("#login-error").should("contain", "Invalid credentials provided.");
+      cy.get("#login-error").should("have.css", "color", "rgb(244, 67, 54)");
     });
   });
 

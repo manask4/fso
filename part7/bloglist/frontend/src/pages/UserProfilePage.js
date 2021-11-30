@@ -1,27 +1,23 @@
 import React from "react";
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
+import Title from "../shared/Title";
 
 function UserProfile() {
   const params = useParams();
   const id = params.id;
   const users = useSelector((state) => state.users);
   const user = users.find((user) => user.id === id);
-  console.log(user);
   if (!user) {
     return null;
   }
 
   return (
     <div>
-      <div className="header">
-        <div className="banner">
-          <h1 className="title">User</h1>
-          <h2>{user.name}</h2>
-        </div>
-      </div>
+      <Title>User</Title>
+      <Title h2>{user.name}</Title>
       <div className="content">
-        <h3>Blogs:</h3>
+        <h3 style={{ color: "#757575" }}>Blogs:</h3>
         {user.blogs.length > 0 && (
           <ol>
             {user.blogs.map((blog) => {
